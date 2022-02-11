@@ -45,11 +45,16 @@ def main():
     for gnumber in l_gnums:
         generate_path = args.path + gnumber[0:3] + '/' + gnumber[3:5] + '/' + gnumber[5] + '/' + gnumber
         
-        read_lines(generate_path + '.var.snp.vcf', generate_path + '.intermediate.file')
-        os.system('java -jar ' + PATH_SNPEFF +'snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC ' + generate_path + '.intermediate.file > '+ generate_path +'.re.var.snp.vcf')
-        os.system('rm '+ generate_path + '.intermediate.file')
-        os.system('perl -pi -e "s/\tANN/;ANN/g" '+ generate_path+'.re.var.snp.vcf')
-        os.system('perl -pi -e "s/\t0.0\t/\tPASS\t/g" '+ generate_path+'.re.var.snp.vcf')
+        try:
+            print('Processing', gnumber)
+            read_lines(generate_path + '.var.snp.vcf', generate_path + '.intermediate.file')
+            os.system('java -jar ' + PATH_SNPEFF +'snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC ' + generate_path + '.intermediate.file > '+ generate_path +'.re.var.snp.vcf')
+            os.system('rm '+ generate_path + '.intermediate.file')
+            os.system('perl -pi -e "s/\tANN/;ANN/g" '+ generate_path+'.re.var.snp.vcf')
+            os.system('perl -pi -e "s/\t0.0\t/\tPASS\t/g" '+ generate_path+'.re.var.snp.vcf')
+        
+        except:
+            print('Gnumber not working', gnumber)
 
 if __name__ == '__main__':
     main()
