@@ -18,7 +18,6 @@ def read_gnumbers(in_file: str):
             list_gnums.append(line)
     return list_gnums
 
-
 def read_lines(in_file: str, out_file:str):
     '''
     Function to generate intermediate file for annotate the snps of vcf file
@@ -31,7 +30,6 @@ def read_lines(in_file: str, out_file:str):
                     
                 else:
                     l = line.strip("\n").split("\t")
-                    
                     line = 'MTB_anc\t' + l[0]+'\t.\t'+l[1]+'\t'+l[2]+'\tPASS\t'+' '.join(l[3:])+'\n'
                 outvcf.write(line) 
 
