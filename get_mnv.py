@@ -298,7 +298,7 @@ def write_vcf(in_vcf, outfile, list_MNV, list_name_genes):
                                 if elemento not in lista_genes_cambios:
                                     gene = elemento
                                     if 'p.' in elemento:
-                                        aa = elemento.strip('p.')
+                                        aa = elemento
                                     elif elemento in SNPEFF:
                                         chg = elemento
                                     sent = '-'.join(['SNP',gene,aa,chg])
@@ -307,7 +307,7 @@ def write_vcf(in_vcf, outfile, list_MNV, list_name_genes):
                             elif "intragenic" not in line:
                                 gene = elemento
                                 if 'p.' in elemento:
-                                    aa = elemento.strip('p.')
+                                    aa = elemento
                                     a_a = True
                                 elif "custom" not in elemento: 
                                     if elemento in SNPEFF:
@@ -335,7 +335,7 @@ def write_vcf(in_vcf, outfile, list_MNV, list_name_genes):
                             t = False            
                             for elemento in info:
                                 if 'p.' in elemento:
-                                    aa = elemento.strip('p.')
+                                    aa = elemento
                                     g = True
                                 elif "gene" in elemento:
                                     gene = elemento.strip('Transcript_gene-').strip('gene-')
@@ -366,7 +366,7 @@ def main():
     parser.add_argument('-g', dest = 'genes', required = True, help = 'File with gene info')
     args = parser.parse_args()
     
-    print(__doc__)
+    #print(__doc__)
 
     sequence = reference_fasta(args.fasta)
     lista_snp = getseq_posbase(args.vcf)
