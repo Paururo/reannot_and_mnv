@@ -52,6 +52,8 @@ def main():
             os.system('rm '+ generate_path + '.intermediate.file')
             os.system('perl -pi -e "s/\tANN/;ANN/g" '+ generate_path+'.re.var.snp.vcf')
             os.system('perl -pi -e "s/\t0.0\t/\tPASS\t/g" '+ generate_path+'.re.var.snp.vcf')
+
+            os.system('python3 get_mnv.py -f MTB_ancestor.fas -g anot_genes.3.txt -v ' + generate_path + '.re.var.snp.vcf')
         
         except:
             print('Gnumber not working', gnumber)
