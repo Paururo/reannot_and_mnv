@@ -28,10 +28,11 @@ def read_lines(in_file: str, out_file:str):
                     line = '#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\n'
                     
                 else:
-                    l = line.strip("\n").split("\t")
-                    line = 'MTB_anc\t' + l[0] + '\t.\t' + l[1] + '\t' + l[2] + '\tPASS\t' + ' '.join(l[3:]) + '\n'
-                outvcf.write(line) 
-
+                    if "#" not in line:
+                        l = line.strip("\n").split("\t")
+                        inf_l = ';'.join(l[7].split('|')[0].split(";")[0:5])
+                        line = 'MTB_anc\t' + l[1] + '\t.\t' + l[3] + '\t' + l[4] + '\tPASS\t' + inf_l +'\t\t'+l[8] +'\t\t' +l[9] + '\n'
+                outvcf.write(line)
 def main():
     '''
     Function to execute all code
