@@ -8,6 +8,7 @@ PATH_SNPEFF = '/storage/PGO/soft/snpEff/'
 SNP_EFFCOMMAND = 'java -jar /home/ruizro/snpEff/snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC " + salida_intermedia + " > " + salida_anotada'
 
 
+
 def read_lines(in_file: str, out_file:str):
     '''
     Function to generate intermediate file for annotate the snps of vcf file
@@ -28,8 +29,8 @@ def main():
     '''
     Function to execute all code
     '''
-    parser = argparse.ArgumentParser(description = 'script to reannotate and put MNVs') 
-    parser.add_argument('-p', dest = 'path', required =True, help = 'Path to vcf files') 
+    parser = argparse.ArgumentParser(description = 'script to reannotate and put MNVs')
+    parser.add_argument('-p', dest = 'path', required =True, help = 'Path to vcf files')
     parser.add_argument('-g', dest = 'gnums', required = True, help = 'File with gnumbers')
     args = parser.parse_args()
 
