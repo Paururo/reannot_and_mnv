@@ -7,6 +7,16 @@ import sys
 PATH_SNPEFF = '/storage/PGO/soft/snpEff/'
 SNP_EFFCOMMAND = 'java -jar /home/ruizro/snpEff/snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC " + salida_intermedia + " > " + salida_anotada'
 
+def read_gnumbers(in_file: str):
+    '''
+    Function to read gnums to process
+    '''
+    list_gnums = []
+    with open(in_file,'r') as i_input:
+        for line in i_input:
+            line = line.strip('\n')
+            list_gnums.append(line)
+    return list_gnums
 
 
 def read_lines(in_file: str, out_file:str):
@@ -33,6 +43,7 @@ def main():
     parser.add_argument('-p', dest = 'path', required =True, help = 'Path to vcf files')
     parser.add_argument('-g', dest = 'gnums', required = True, help = 'File with gnumbers')
     args = parser.parse_args()
+    l_gnums = read_gnumbers(args.gnums)
 
 if __name__ == '__main__':
     main()
