@@ -29,7 +29,7 @@ def read_lines(in_file: str, out_file:str):
                     
                 else:
                     l = line.strip("\n").split("\t")
-                    line = 'MTB_anc\t' + l[0]+'\t.\t'+l[1]+'\t'+l[2]+'\tPASS\t'+' '.join(l[3:])+'\n'
+                    line = 'MTB_anc\t' + l[0] + '\t.\t' + l[1] + '\t' + l[2] + '\tPASS\t' + ' '.join(l[3:]) + '\n'
                 outvcf.write(line) 
 
 def main():
