@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import sys
+import os
 
 PATH_SNPEFF = '/storage/PGO/soft/snpEff/'
 SNP_EFFCOMMAND = 'java -jar /home/ruizro/snpEff/snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC " + salida_intermedia + " > " + salida_anotada'
@@ -44,6 +44,10 @@ def main():
     parser.add_argument('-g', dest = 'gnums', required = True, help = 'File with gnumbers')
     args = parser.parse_args()
     l_gnums = read_gnumbers(args.gnums)
+    for gnumber in l_gnums:
+        read_lines(PATH_SNPEFF + gnumber + '.var.snp.vcf', PATH_SNPEFF + gnumber + '.intermediate.file')
+        os.system('')
+
 
 if __name__ == '__main__':
     main()
