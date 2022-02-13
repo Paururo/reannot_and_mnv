@@ -46,13 +46,12 @@ def main():
         generate_path = args.path + gnumber[0:3] + '/' + gnumber[3:5] + '/' + gnumber[5] + '/' + gnumber
         
         try:
-            print('Processing', gnumber)
             read_lines(generate_path + '.var.snp.vcf', generate_path + '.intermediate.file')
             os.system('java -jar ' + PATH_SNPEFF +'snpEff.jar ann -noStats -no-downstream -no-upstream MTB_ANC -interval ' + PATH_SNPEFF +'additionnal_annotations.bed ' + generate_path + '.intermediate.file > '+ generate_path +'.re.var.snp.vcf')
             os.system('rm '+ generate_path + '.intermediate.file')
             os.system('perl -pi -e "s/\tANN/;ANN/g" '+ generate_path+'.re.var.snp.vcf')
             os.system('perl -pi -e "s/\t0.0\t/\t.\tPASS\t/g" '+ generate_path+'.re.var.snp.vcf')
-
+            print('Processing', gnumber)
             os.system('python3 get_mnv.py -f MTB_ancestor.fas -g anot_genes.3.txt -v ' + generate_path + '.re.var.snp.vcf')
         
         except:
